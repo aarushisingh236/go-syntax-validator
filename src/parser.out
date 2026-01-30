@@ -1,0 +1,1065 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> statement_list
+Rule 2     statement_list -> statement
+Rule 3     statement_list -> statement statement_list
+Rule 4     statement -> var_declaration
+Rule 5     statement -> assignment
+Rule 6     statement -> ifelse
+Rule 7     statement -> forloop
+Rule 8     statement -> switch_stmt
+Rule 9     statement -> return_stmt
+Rule 10    var_declaration -> VAR ID ASSIGN expression
+Rule 11    assignment -> ID ASSIGN expression
+Rule 12    ifelse -> IF condition block
+Rule 13    ifelse -> IF condition block ELSE block
+Rule 14    forloop -> FOR condition block
+Rule 15    switch_stmt -> SWITCH expression LBRACE case_list RBRACE
+Rule 16    case_list -> case_stmt
+Rule 17    case_list -> case_stmt case_list
+Rule 18    case_stmt -> CASE expression COLON block
+Rule 19    case_stmt -> DEFAULT COLON block
+Rule 20    return_stmt -> RETURN expression
+Rule 21    condition -> expression LT expression
+Rule 22    condition -> expression GT expression
+Rule 23    condition -> expression EQ expression
+Rule 24    block -> LBRACE statement_list RBRACE
+Rule 25    expression -> NUMBER
+Rule 26    expression -> ID
+Rule 27    expression -> expression PLUS expression
+Rule 28    expression -> expression MINUS expression
+Rule 29    expression -> expression TIMES expression
+Rule 30    expression -> expression DIVIDE expression
+
+Terminals, with rules where they appear
+
+ASSIGN               : 10 11
+CASE                 : 18
+COLON                : 18 19
+DEFAULT              : 19
+DIVIDE               : 30
+ELSE                 : 13
+EQ                   : 23
+FOR                  : 14
+GT                   : 22
+ID                   : 10 11 26
+IF                   : 12 13
+LBRACE               : 15 24
+LT                   : 21
+MINUS                : 28
+NUMBER               : 25
+PLUS                 : 27
+RBRACE               : 15 24
+RETURN               : 20
+SWITCH               : 15
+TIMES                : 29
+VAR                  : 10
+error                : 
+
+Nonterminals, with rules where they appear
+
+assignment           : 5
+block                : 12 13 13 14 18 19
+case_list            : 15 17
+case_stmt            : 16 17
+condition            : 12 13 14
+expression           : 10 11 15 18 20 21 21 22 22 23 23 27 27 28 28 29 29 30 30
+forloop              : 7
+ifelse               : 6
+program              : 0
+return_stmt          : 9
+statement            : 2 3
+statement_list       : 1 3 24
+switch_stmt          : 8
+var_declaration      : 4
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . statement_list
+    (2) statement_list -> . statement
+    (3) statement_list -> . statement statement_list
+    (4) statement -> . var_declaration
+    (5) statement -> . assignment
+    (6) statement -> . ifelse
+    (7) statement -> . forloop
+    (8) statement -> . switch_stmt
+    (9) statement -> . return_stmt
+    (10) var_declaration -> . VAR ID ASSIGN expression
+    (11) assignment -> . ID ASSIGN expression
+    (12) ifelse -> . IF condition block
+    (13) ifelse -> . IF condition block ELSE block
+    (14) forloop -> . FOR condition block
+    (15) switch_stmt -> . SWITCH expression LBRACE case_list RBRACE
+    (20) return_stmt -> . RETURN expression
+
+    VAR             shift and go to state 10
+    ID              shift and go to state 11
+    IF              shift and go to state 12
+    FOR             shift and go to state 13
+    SWITCH          shift and go to state 14
+    RETURN          shift and go to state 15
+
+    program                        shift and go to state 1
+    statement_list                 shift and go to state 2
+    statement                      shift and go to state 3
+    var_declaration                shift and go to state 4
+    assignment                     shift and go to state 5
+    ifelse                         shift and go to state 6
+    forloop                        shift and go to state 7
+    switch_stmt                    shift and go to state 8
+    return_stmt                    shift and go to state 9
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> statement_list .
+
+    $end            reduce using rule 1 (program -> statement_list .)
+
+
+state 3
+
+    (2) statement_list -> statement .
+    (3) statement_list -> statement . statement_list
+    (2) statement_list -> . statement
+    (3) statement_list -> . statement statement_list
+    (4) statement -> . var_declaration
+    (5) statement -> . assignment
+    (6) statement -> . ifelse
+    (7) statement -> . forloop
+    (8) statement -> . switch_stmt
+    (9) statement -> . return_stmt
+    (10) var_declaration -> . VAR ID ASSIGN expression
+    (11) assignment -> . ID ASSIGN expression
+    (12) ifelse -> . IF condition block
+    (13) ifelse -> . IF condition block ELSE block
+    (14) forloop -> . FOR condition block
+    (15) switch_stmt -> . SWITCH expression LBRACE case_list RBRACE
+    (20) return_stmt -> . RETURN expression
+
+    $end            reduce using rule 2 (statement_list -> statement .)
+    RBRACE          reduce using rule 2 (statement_list -> statement .)
+    VAR             shift and go to state 10
+    ID              shift and go to state 11
+    IF              shift and go to state 12
+    FOR             shift and go to state 13
+    SWITCH          shift and go to state 14
+    RETURN          shift and go to state 15
+
+    statement                      shift and go to state 3
+    statement_list                 shift and go to state 16
+    var_declaration                shift and go to state 4
+    assignment                     shift and go to state 5
+    ifelse                         shift and go to state 6
+    forloop                        shift and go to state 7
+    switch_stmt                    shift and go to state 8
+    return_stmt                    shift and go to state 9
+
+state 4
+
+    (4) statement -> var_declaration .
+
+    VAR             reduce using rule 4 (statement -> var_declaration .)
+    ID              reduce using rule 4 (statement -> var_declaration .)
+    IF              reduce using rule 4 (statement -> var_declaration .)
+    FOR             reduce using rule 4 (statement -> var_declaration .)
+    SWITCH          reduce using rule 4 (statement -> var_declaration .)
+    RETURN          reduce using rule 4 (statement -> var_declaration .)
+    $end            reduce using rule 4 (statement -> var_declaration .)
+    RBRACE          reduce using rule 4 (statement -> var_declaration .)
+
+
+state 5
+
+    (5) statement -> assignment .
+
+    VAR             reduce using rule 5 (statement -> assignment .)
+    ID              reduce using rule 5 (statement -> assignment .)
+    IF              reduce using rule 5 (statement -> assignment .)
+    FOR             reduce using rule 5 (statement -> assignment .)
+    SWITCH          reduce using rule 5 (statement -> assignment .)
+    RETURN          reduce using rule 5 (statement -> assignment .)
+    $end            reduce using rule 5 (statement -> assignment .)
+    RBRACE          reduce using rule 5 (statement -> assignment .)
+
+
+state 6
+
+    (6) statement -> ifelse .
+
+    VAR             reduce using rule 6 (statement -> ifelse .)
+    ID              reduce using rule 6 (statement -> ifelse .)
+    IF              reduce using rule 6 (statement -> ifelse .)
+    FOR             reduce using rule 6 (statement -> ifelse .)
+    SWITCH          reduce using rule 6 (statement -> ifelse .)
+    RETURN          reduce using rule 6 (statement -> ifelse .)
+    $end            reduce using rule 6 (statement -> ifelse .)
+    RBRACE          reduce using rule 6 (statement -> ifelse .)
+
+
+state 7
+
+    (7) statement -> forloop .
+
+    VAR             reduce using rule 7 (statement -> forloop .)
+    ID              reduce using rule 7 (statement -> forloop .)
+    IF              reduce using rule 7 (statement -> forloop .)
+    FOR             reduce using rule 7 (statement -> forloop .)
+    SWITCH          reduce using rule 7 (statement -> forloop .)
+    RETURN          reduce using rule 7 (statement -> forloop .)
+    $end            reduce using rule 7 (statement -> forloop .)
+    RBRACE          reduce using rule 7 (statement -> forloop .)
+
+
+state 8
+
+    (8) statement -> switch_stmt .
+
+    VAR             reduce using rule 8 (statement -> switch_stmt .)
+    ID              reduce using rule 8 (statement -> switch_stmt .)
+    IF              reduce using rule 8 (statement -> switch_stmt .)
+    FOR             reduce using rule 8 (statement -> switch_stmt .)
+    SWITCH          reduce using rule 8 (statement -> switch_stmt .)
+    RETURN          reduce using rule 8 (statement -> switch_stmt .)
+    $end            reduce using rule 8 (statement -> switch_stmt .)
+    RBRACE          reduce using rule 8 (statement -> switch_stmt .)
+
+
+state 9
+
+    (9) statement -> return_stmt .
+
+    VAR             reduce using rule 9 (statement -> return_stmt .)
+    ID              reduce using rule 9 (statement -> return_stmt .)
+    IF              reduce using rule 9 (statement -> return_stmt .)
+    FOR             reduce using rule 9 (statement -> return_stmt .)
+    SWITCH          reduce using rule 9 (statement -> return_stmt .)
+    RETURN          reduce using rule 9 (statement -> return_stmt .)
+    $end            reduce using rule 9 (statement -> return_stmt .)
+    RBRACE          reduce using rule 9 (statement -> return_stmt .)
+
+
+state 10
+
+    (10) var_declaration -> VAR . ID ASSIGN expression
+
+    ID              shift and go to state 17
+
+
+state 11
+
+    (11) assignment -> ID . ASSIGN expression
+
+    ASSIGN          shift and go to state 18
+
+
+state 12
+
+    (12) ifelse -> IF . condition block
+    (13) ifelse -> IF . condition block ELSE block
+    (21) condition -> . expression LT expression
+    (22) condition -> . expression GT expression
+    (23) condition -> . expression EQ expression
+    (25) expression -> . NUMBER
+    (26) expression -> . ID
+    (27) expression -> . expression PLUS expression
+    (28) expression -> . expression MINUS expression
+    (29) expression -> . expression TIMES expression
+    (30) expression -> . expression DIVIDE expression
+
+    NUMBER          shift and go to state 21
+    ID              shift and go to state 22
+
+    condition                      shift and go to state 19
+    expression                     shift and go to state 20
+
+state 13
+
+    (14) forloop -> FOR . condition block
+    (21) condition -> . expression LT expression
+    (22) condition -> . expression GT expression
+    (23) condition -> . expression EQ expression
+    (25) expression -> . NUMBER
+    (26) expression -> . ID
+    (27) expression -> . expression PLUS expression
+    (28) expression -> . expression MINUS expression
+    (29) expression -> . expression TIMES expression
+    (30) expression -> . expression DIVIDE expression
+
+    NUMBER          shift and go to state 21
+    ID              shift and go to state 22
+
+    condition                      shift and go to state 23
+    expression                     shift and go to state 20
+
+state 14
+
+    (15) switch_stmt -> SWITCH . expression LBRACE case_list RBRACE
+    (25) expression -> . NUMBER
+    (26) expression -> . ID
+    (27) expression -> . expression PLUS expression
+    (28) expression -> . expression MINUS expression
+    (29) expression -> . expression TIMES expression
+    (30) expression -> . expression DIVIDE expression
+
+    NUMBER          shift and go to state 21
+    ID              shift and go to state 22
+
+    expression                     shift and go to state 24
+
+state 15
+
+    (20) return_stmt -> RETURN . expression
+    (25) expression -> . NUMBER
+    (26) expression -> . ID
+    (27) expression -> . expression PLUS expression
+    (28) expression -> . expression MINUS expression
+    (29) expression -> . expression TIMES expression
+    (30) expression -> . expression DIVIDE expression
+
+    NUMBER          shift and go to state 21
+    ID              shift and go to state 22
+
+    expression                     shift and go to state 25
+
+state 16
+
+    (3) statement_list -> statement statement_list .
+
+    $end            reduce using rule 3 (statement_list -> statement statement_list .)
+    RBRACE          reduce using rule 3 (statement_list -> statement statement_list .)
+
+
+state 17
+
+    (10) var_declaration -> VAR ID . ASSIGN expression
+
+    ASSIGN          shift and go to state 26
+
+
+state 18
+
+    (11) assignment -> ID ASSIGN . expression
+    (25) expression -> . NUMBER
+    (26) expression -> . ID
+    (27) expression -> . expression PLUS expression
+    (28) expression -> . expression MINUS expression
+    (29) expression -> . expression TIMES expression
+    (30) expression -> . expression DIVIDE expression
+
+    NUMBER          shift and go to state 21
+    ID              shift and go to state 22
+
+    expression                     shift and go to state 27
+
+state 19
+
+    (12) ifelse -> IF condition . block
+    (13) ifelse -> IF condition . block ELSE block
+    (24) block -> . LBRACE statement_list RBRACE
+
+    LBRACE          shift and go to state 29
+
+    block                          shift and go to state 28
+
+state 20
+
+    (21) condition -> expression . LT expression
+    (22) condition -> expression . GT expression
+    (23) condition -> expression . EQ expression
+    (27) expression -> expression . PLUS expression
+    (28) expression -> expression . MINUS expression
+    (29) expression -> expression . TIMES expression
+    (30) expression -> expression . DIVIDE expression
+
+    LT              shift and go to state 30
+    GT              shift and go to state 31
+    EQ              shift and go to state 32
+    PLUS            shift and go to state 33
+    MINUS           shift and go to state 34
+    TIMES           shift and go to state 35
+    DIVIDE          shift and go to state 36
+
+
+state 21
+
+    (25) expression -> NUMBER .
+
+    LT              reduce using rule 25 (expression -> NUMBER .)
+    GT              reduce using rule 25 (expression -> NUMBER .)
+    EQ              reduce using rule 25 (expression -> NUMBER .)
+    PLUS            reduce using rule 25 (expression -> NUMBER .)
+    MINUS           reduce using rule 25 (expression -> NUMBER .)
+    TIMES           reduce using rule 25 (expression -> NUMBER .)
+    DIVIDE          reduce using rule 25 (expression -> NUMBER .)
+    LBRACE          reduce using rule 25 (expression -> NUMBER .)
+    VAR             reduce using rule 25 (expression -> NUMBER .)
+    ID              reduce using rule 25 (expression -> NUMBER .)
+    IF              reduce using rule 25 (expression -> NUMBER .)
+    FOR             reduce using rule 25 (expression -> NUMBER .)
+    SWITCH          reduce using rule 25 (expression -> NUMBER .)
+    RETURN          reduce using rule 25 (expression -> NUMBER .)
+    $end            reduce using rule 25 (expression -> NUMBER .)
+    RBRACE          reduce using rule 25 (expression -> NUMBER .)
+    COLON           reduce using rule 25 (expression -> NUMBER .)
+
+
+state 22
+
+    (26) expression -> ID .
+
+    LT              reduce using rule 26 (expression -> ID .)
+    GT              reduce using rule 26 (expression -> ID .)
+    EQ              reduce using rule 26 (expression -> ID .)
+    PLUS            reduce using rule 26 (expression -> ID .)
+    MINUS           reduce using rule 26 (expression -> ID .)
+    TIMES           reduce using rule 26 (expression -> ID .)
+    DIVIDE          reduce using rule 26 (expression -> ID .)
+    LBRACE          reduce using rule 26 (expression -> ID .)
+    VAR             reduce using rule 26 (expression -> ID .)
+    ID              reduce using rule 26 (expression -> ID .)
+    IF              reduce using rule 26 (expression -> ID .)
+    FOR             reduce using rule 26 (expression -> ID .)
+    SWITCH          reduce using rule 26 (expression -> ID .)
+    RETURN          reduce using rule 26 (expression -> ID .)
+    $end            reduce using rule 26 (expression -> ID .)
+    RBRACE          reduce using rule 26 (expression -> ID .)
+    COLON           reduce using rule 26 (expression -> ID .)
+
+
+state 23
+
+    (14) forloop -> FOR condition . block
+    (24) block -> . LBRACE statement_list RBRACE
+
+    LBRACE          shift and go to state 29
+
+    block                          shift and go to state 37
+
+state 24
+
+    (15) switch_stmt -> SWITCH expression . LBRACE case_list RBRACE
+    (27) expression -> expression . PLUS expression
+    (28) expression -> expression . MINUS expression
+    (29) expression -> expression . TIMES expression
+    (30) expression -> expression . DIVIDE expression
+
+    LBRACE          shift and go to state 38
+    PLUS            shift and go to state 33
+    MINUS           shift and go to state 34
+    TIMES           shift and go to state 35
+    DIVIDE          shift and go to state 36
+
+
+state 25
+
+    (20) return_stmt -> RETURN expression .
+    (27) expression -> expression . PLUS expression
+    (28) expression -> expression . MINUS expression
+    (29) expression -> expression . TIMES expression
+    (30) expression -> expression . DIVIDE expression
+
+    VAR             reduce using rule 20 (return_stmt -> RETURN expression .)
+    ID              reduce using rule 20 (return_stmt -> RETURN expression .)
+    IF              reduce using rule 20 (return_stmt -> RETURN expression .)
+    FOR             reduce using rule 20 (return_stmt -> RETURN expression .)
+    SWITCH          reduce using rule 20 (return_stmt -> RETURN expression .)
+    RETURN          reduce using rule 20 (return_stmt -> RETURN expression .)
+    $end            reduce using rule 20 (return_stmt -> RETURN expression .)
+    RBRACE          reduce using rule 20 (return_stmt -> RETURN expression .)
+    PLUS            shift and go to state 33
+    MINUS           shift and go to state 34
+    TIMES           shift and go to state 35
+    DIVIDE          shift and go to state 36
+
+
+state 26
+
+    (10) var_declaration -> VAR ID ASSIGN . expression
+    (25) expression -> . NUMBER
+    (26) expression -> . ID
+    (27) expression -> . expression PLUS expression
+    (28) expression -> . expression MINUS expression
+    (29) expression -> . expression TIMES expression
+    (30) expression -> . expression DIVIDE expression
+
+    NUMBER          shift and go to state 21
+    ID              shift and go to state 22
+
+    expression                     shift and go to state 39
+
+state 27
+
+    (11) assignment -> ID ASSIGN expression .
+    (27) expression -> expression . PLUS expression
+    (28) expression -> expression . MINUS expression
+    (29) expression -> expression . TIMES expression
+    (30) expression -> expression . DIVIDE expression
+
+    VAR             reduce using rule 11 (assignment -> ID ASSIGN expression .)
+    ID              reduce using rule 11 (assignment -> ID ASSIGN expression .)
+    IF              reduce using rule 11 (assignment -> ID ASSIGN expression .)
+    FOR             reduce using rule 11 (assignment -> ID ASSIGN expression .)
+    SWITCH          reduce using rule 11 (assignment -> ID ASSIGN expression .)
+    RETURN          reduce using rule 11 (assignment -> ID ASSIGN expression .)
+    $end            reduce using rule 11 (assignment -> ID ASSIGN expression .)
+    RBRACE          reduce using rule 11 (assignment -> ID ASSIGN expression .)
+    PLUS            shift and go to state 33
+    MINUS           shift and go to state 34
+    TIMES           shift and go to state 35
+    DIVIDE          shift and go to state 36
+
+
+state 28
+
+    (12) ifelse -> IF condition block .
+    (13) ifelse -> IF condition block . ELSE block
+
+    VAR             reduce using rule 12 (ifelse -> IF condition block .)
+    ID              reduce using rule 12 (ifelse -> IF condition block .)
+    IF              reduce using rule 12 (ifelse -> IF condition block .)
+    FOR             reduce using rule 12 (ifelse -> IF condition block .)
+    SWITCH          reduce using rule 12 (ifelse -> IF condition block .)
+    RETURN          reduce using rule 12 (ifelse -> IF condition block .)
+    $end            reduce using rule 12 (ifelse -> IF condition block .)
+    RBRACE          reduce using rule 12 (ifelse -> IF condition block .)
+    ELSE            shift and go to state 40
+
+
+state 29
+
+    (24) block -> LBRACE . statement_list RBRACE
+    (2) statement_list -> . statement
+    (3) statement_list -> . statement statement_list
+    (4) statement -> . var_declaration
+    (5) statement -> . assignment
+    (6) statement -> . ifelse
+    (7) statement -> . forloop
+    (8) statement -> . switch_stmt
+    (9) statement -> . return_stmt
+    (10) var_declaration -> . VAR ID ASSIGN expression
+    (11) assignment -> . ID ASSIGN expression
+    (12) ifelse -> . IF condition block
+    (13) ifelse -> . IF condition block ELSE block
+    (14) forloop -> . FOR condition block
+    (15) switch_stmt -> . SWITCH expression LBRACE case_list RBRACE
+    (20) return_stmt -> . RETURN expression
+
+    VAR             shift and go to state 10
+    ID              shift and go to state 11
+    IF              shift and go to state 12
+    FOR             shift and go to state 13
+    SWITCH          shift and go to state 14
+    RETURN          shift and go to state 15
+
+    statement_list                 shift and go to state 41
+    statement                      shift and go to state 3
+    var_declaration                shift and go to state 4
+    assignment                     shift and go to state 5
+    ifelse                         shift and go to state 6
+    forloop                        shift and go to state 7
+    switch_stmt                    shift and go to state 8
+    return_stmt                    shift and go to state 9
+
+state 30
+
+    (21) condition -> expression LT . expression
+    (25) expression -> . NUMBER
+    (26) expression -> . ID
+    (27) expression -> . expression PLUS expression
+    (28) expression -> . expression MINUS expression
+    (29) expression -> . expression TIMES expression
+    (30) expression -> . expression DIVIDE expression
+
+    NUMBER          shift and go to state 21
+    ID              shift and go to state 22
+
+    expression                     shift and go to state 42
+
+state 31
+
+    (22) condition -> expression GT . expression
+    (25) expression -> . NUMBER
+    (26) expression -> . ID
+    (27) expression -> . expression PLUS expression
+    (28) expression -> . expression MINUS expression
+    (29) expression -> . expression TIMES expression
+    (30) expression -> . expression DIVIDE expression
+
+    NUMBER          shift and go to state 21
+    ID              shift and go to state 22
+
+    expression                     shift and go to state 43
+
+state 32
+
+    (23) condition -> expression EQ . expression
+    (25) expression -> . NUMBER
+    (26) expression -> . ID
+    (27) expression -> . expression PLUS expression
+    (28) expression -> . expression MINUS expression
+    (29) expression -> . expression TIMES expression
+    (30) expression -> . expression DIVIDE expression
+
+    NUMBER          shift and go to state 21
+    ID              shift and go to state 22
+
+    expression                     shift and go to state 44
+
+state 33
+
+    (27) expression -> expression PLUS . expression
+    (25) expression -> . NUMBER
+    (26) expression -> . ID
+    (27) expression -> . expression PLUS expression
+    (28) expression -> . expression MINUS expression
+    (29) expression -> . expression TIMES expression
+    (30) expression -> . expression DIVIDE expression
+
+    NUMBER          shift and go to state 21
+    ID              shift and go to state 22
+
+    expression                     shift and go to state 45
+
+state 34
+
+    (28) expression -> expression MINUS . expression
+    (25) expression -> . NUMBER
+    (26) expression -> . ID
+    (27) expression -> . expression PLUS expression
+    (28) expression -> . expression MINUS expression
+    (29) expression -> . expression TIMES expression
+    (30) expression -> . expression DIVIDE expression
+
+    NUMBER          shift and go to state 21
+    ID              shift and go to state 22
+
+    expression                     shift and go to state 46
+
+state 35
+
+    (29) expression -> expression TIMES . expression
+    (25) expression -> . NUMBER
+    (26) expression -> . ID
+    (27) expression -> . expression PLUS expression
+    (28) expression -> . expression MINUS expression
+    (29) expression -> . expression TIMES expression
+    (30) expression -> . expression DIVIDE expression
+
+    NUMBER          shift and go to state 21
+    ID              shift and go to state 22
+
+    expression                     shift and go to state 47
+
+state 36
+
+    (30) expression -> expression DIVIDE . expression
+    (25) expression -> . NUMBER
+    (26) expression -> . ID
+    (27) expression -> . expression PLUS expression
+    (28) expression -> . expression MINUS expression
+    (29) expression -> . expression TIMES expression
+    (30) expression -> . expression DIVIDE expression
+
+    NUMBER          shift and go to state 21
+    ID              shift and go to state 22
+
+    expression                     shift and go to state 48
+
+state 37
+
+    (14) forloop -> FOR condition block .
+
+    VAR             reduce using rule 14 (forloop -> FOR condition block .)
+    ID              reduce using rule 14 (forloop -> FOR condition block .)
+    IF              reduce using rule 14 (forloop -> FOR condition block .)
+    FOR             reduce using rule 14 (forloop -> FOR condition block .)
+    SWITCH          reduce using rule 14 (forloop -> FOR condition block .)
+    RETURN          reduce using rule 14 (forloop -> FOR condition block .)
+    $end            reduce using rule 14 (forloop -> FOR condition block .)
+    RBRACE          reduce using rule 14 (forloop -> FOR condition block .)
+
+
+state 38
+
+    (15) switch_stmt -> SWITCH expression LBRACE . case_list RBRACE
+    (16) case_list -> . case_stmt
+    (17) case_list -> . case_stmt case_list
+    (18) case_stmt -> . CASE expression COLON block
+    (19) case_stmt -> . DEFAULT COLON block
+
+    CASE            shift and go to state 51
+    DEFAULT         shift and go to state 52
+
+    case_list                      shift and go to state 49
+    case_stmt                      shift and go to state 50
+
+state 39
+
+    (10) var_declaration -> VAR ID ASSIGN expression .
+    (27) expression -> expression . PLUS expression
+    (28) expression -> expression . MINUS expression
+    (29) expression -> expression . TIMES expression
+    (30) expression -> expression . DIVIDE expression
+
+    VAR             reduce using rule 10 (var_declaration -> VAR ID ASSIGN expression .)
+    ID              reduce using rule 10 (var_declaration -> VAR ID ASSIGN expression .)
+    IF              reduce using rule 10 (var_declaration -> VAR ID ASSIGN expression .)
+    FOR             reduce using rule 10 (var_declaration -> VAR ID ASSIGN expression .)
+    SWITCH          reduce using rule 10 (var_declaration -> VAR ID ASSIGN expression .)
+    RETURN          reduce using rule 10 (var_declaration -> VAR ID ASSIGN expression .)
+    $end            reduce using rule 10 (var_declaration -> VAR ID ASSIGN expression .)
+    RBRACE          reduce using rule 10 (var_declaration -> VAR ID ASSIGN expression .)
+    PLUS            shift and go to state 33
+    MINUS           shift and go to state 34
+    TIMES           shift and go to state 35
+    DIVIDE          shift and go to state 36
+
+
+state 40
+
+    (13) ifelse -> IF condition block ELSE . block
+    (24) block -> . LBRACE statement_list RBRACE
+
+    LBRACE          shift and go to state 29
+
+    block                          shift and go to state 53
+
+state 41
+
+    (24) block -> LBRACE statement_list . RBRACE
+
+    RBRACE          shift and go to state 54
+
+
+state 42
+
+    (21) condition -> expression LT expression .
+    (27) expression -> expression . PLUS expression
+    (28) expression -> expression . MINUS expression
+    (29) expression -> expression . TIMES expression
+    (30) expression -> expression . DIVIDE expression
+
+    LBRACE          reduce using rule 21 (condition -> expression LT expression .)
+    PLUS            shift and go to state 33
+    MINUS           shift and go to state 34
+    TIMES           shift and go to state 35
+    DIVIDE          shift and go to state 36
+
+
+state 43
+
+    (22) condition -> expression GT expression .
+    (27) expression -> expression . PLUS expression
+    (28) expression -> expression . MINUS expression
+    (29) expression -> expression . TIMES expression
+    (30) expression -> expression . DIVIDE expression
+
+    LBRACE          reduce using rule 22 (condition -> expression GT expression .)
+    PLUS            shift and go to state 33
+    MINUS           shift and go to state 34
+    TIMES           shift and go to state 35
+    DIVIDE          shift and go to state 36
+
+
+state 44
+
+    (23) condition -> expression EQ expression .
+    (27) expression -> expression . PLUS expression
+    (28) expression -> expression . MINUS expression
+    (29) expression -> expression . TIMES expression
+    (30) expression -> expression . DIVIDE expression
+
+    LBRACE          reduce using rule 23 (condition -> expression EQ expression .)
+    PLUS            shift and go to state 33
+    MINUS           shift and go to state 34
+    TIMES           shift and go to state 35
+    DIVIDE          shift and go to state 36
+
+
+state 45
+
+    (27) expression -> expression PLUS expression .
+    (27) expression -> expression . PLUS expression
+    (28) expression -> expression . MINUS expression
+    (29) expression -> expression . TIMES expression
+    (30) expression -> expression . DIVIDE expression
+
+    LT              reduce using rule 27 (expression -> expression PLUS expression .)
+    GT              reduce using rule 27 (expression -> expression PLUS expression .)
+    EQ              reduce using rule 27 (expression -> expression PLUS expression .)
+    PLUS            reduce using rule 27 (expression -> expression PLUS expression .)
+    MINUS           reduce using rule 27 (expression -> expression PLUS expression .)
+    LBRACE          reduce using rule 27 (expression -> expression PLUS expression .)
+    VAR             reduce using rule 27 (expression -> expression PLUS expression .)
+    ID              reduce using rule 27 (expression -> expression PLUS expression .)
+    IF              reduce using rule 27 (expression -> expression PLUS expression .)
+    FOR             reduce using rule 27 (expression -> expression PLUS expression .)
+    SWITCH          reduce using rule 27 (expression -> expression PLUS expression .)
+    RETURN          reduce using rule 27 (expression -> expression PLUS expression .)
+    $end            reduce using rule 27 (expression -> expression PLUS expression .)
+    RBRACE          reduce using rule 27 (expression -> expression PLUS expression .)
+    COLON           reduce using rule 27 (expression -> expression PLUS expression .)
+    TIMES           shift and go to state 35
+    DIVIDE          shift and go to state 36
+
+  ! TIMES           [ reduce using rule 27 (expression -> expression PLUS expression .) ]
+  ! DIVIDE          [ reduce using rule 27 (expression -> expression PLUS expression .) ]
+  ! PLUS            [ shift and go to state 33 ]
+  ! MINUS           [ shift and go to state 34 ]
+
+
+state 46
+
+    (28) expression -> expression MINUS expression .
+    (27) expression -> expression . PLUS expression
+    (28) expression -> expression . MINUS expression
+    (29) expression -> expression . TIMES expression
+    (30) expression -> expression . DIVIDE expression
+
+    LT              reduce using rule 28 (expression -> expression MINUS expression .)
+    GT              reduce using rule 28 (expression -> expression MINUS expression .)
+    EQ              reduce using rule 28 (expression -> expression MINUS expression .)
+    PLUS            reduce using rule 28 (expression -> expression MINUS expression .)
+    MINUS           reduce using rule 28 (expression -> expression MINUS expression .)
+    LBRACE          reduce using rule 28 (expression -> expression MINUS expression .)
+    VAR             reduce using rule 28 (expression -> expression MINUS expression .)
+    ID              reduce using rule 28 (expression -> expression MINUS expression .)
+    IF              reduce using rule 28 (expression -> expression MINUS expression .)
+    FOR             reduce using rule 28 (expression -> expression MINUS expression .)
+    SWITCH          reduce using rule 28 (expression -> expression MINUS expression .)
+    RETURN          reduce using rule 28 (expression -> expression MINUS expression .)
+    $end            reduce using rule 28 (expression -> expression MINUS expression .)
+    RBRACE          reduce using rule 28 (expression -> expression MINUS expression .)
+    COLON           reduce using rule 28 (expression -> expression MINUS expression .)
+    TIMES           shift and go to state 35
+    DIVIDE          shift and go to state 36
+
+  ! TIMES           [ reduce using rule 28 (expression -> expression MINUS expression .) ]
+  ! DIVIDE          [ reduce using rule 28 (expression -> expression MINUS expression .) ]
+  ! PLUS            [ shift and go to state 33 ]
+  ! MINUS           [ shift and go to state 34 ]
+
+
+state 47
+
+    (29) expression -> expression TIMES expression .
+    (27) expression -> expression . PLUS expression
+    (28) expression -> expression . MINUS expression
+    (29) expression -> expression . TIMES expression
+    (30) expression -> expression . DIVIDE expression
+
+    LT              reduce using rule 29 (expression -> expression TIMES expression .)
+    GT              reduce using rule 29 (expression -> expression TIMES expression .)
+    EQ              reduce using rule 29 (expression -> expression TIMES expression .)
+    PLUS            reduce using rule 29 (expression -> expression TIMES expression .)
+    MINUS           reduce using rule 29 (expression -> expression TIMES expression .)
+    TIMES           reduce using rule 29 (expression -> expression TIMES expression .)
+    DIVIDE          reduce using rule 29 (expression -> expression TIMES expression .)
+    LBRACE          reduce using rule 29 (expression -> expression TIMES expression .)
+    VAR             reduce using rule 29 (expression -> expression TIMES expression .)
+    ID              reduce using rule 29 (expression -> expression TIMES expression .)
+    IF              reduce using rule 29 (expression -> expression TIMES expression .)
+    FOR             reduce using rule 29 (expression -> expression TIMES expression .)
+    SWITCH          reduce using rule 29 (expression -> expression TIMES expression .)
+    RETURN          reduce using rule 29 (expression -> expression TIMES expression .)
+    $end            reduce using rule 29 (expression -> expression TIMES expression .)
+    RBRACE          reduce using rule 29 (expression -> expression TIMES expression .)
+    COLON           reduce using rule 29 (expression -> expression TIMES expression .)
+
+  ! PLUS            [ shift and go to state 33 ]
+  ! MINUS           [ shift and go to state 34 ]
+  ! TIMES           [ shift and go to state 35 ]
+  ! DIVIDE          [ shift and go to state 36 ]
+
+
+state 48
+
+    (30) expression -> expression DIVIDE expression .
+    (27) expression -> expression . PLUS expression
+    (28) expression -> expression . MINUS expression
+    (29) expression -> expression . TIMES expression
+    (30) expression -> expression . DIVIDE expression
+
+    LT              reduce using rule 30 (expression -> expression DIVIDE expression .)
+    GT              reduce using rule 30 (expression -> expression DIVIDE expression .)
+    EQ              reduce using rule 30 (expression -> expression DIVIDE expression .)
+    PLUS            reduce using rule 30 (expression -> expression DIVIDE expression .)
+    MINUS           reduce using rule 30 (expression -> expression DIVIDE expression .)
+    TIMES           reduce using rule 30 (expression -> expression DIVIDE expression .)
+    DIVIDE          reduce using rule 30 (expression -> expression DIVIDE expression .)
+    LBRACE          reduce using rule 30 (expression -> expression DIVIDE expression .)
+    VAR             reduce using rule 30 (expression -> expression DIVIDE expression .)
+    ID              reduce using rule 30 (expression -> expression DIVIDE expression .)
+    IF              reduce using rule 30 (expression -> expression DIVIDE expression .)
+    FOR             reduce using rule 30 (expression -> expression DIVIDE expression .)
+    SWITCH          reduce using rule 30 (expression -> expression DIVIDE expression .)
+    RETURN          reduce using rule 30 (expression -> expression DIVIDE expression .)
+    $end            reduce using rule 30 (expression -> expression DIVIDE expression .)
+    RBRACE          reduce using rule 30 (expression -> expression DIVIDE expression .)
+    COLON           reduce using rule 30 (expression -> expression DIVIDE expression .)
+
+  ! PLUS            [ shift and go to state 33 ]
+  ! MINUS           [ shift and go to state 34 ]
+  ! TIMES           [ shift and go to state 35 ]
+  ! DIVIDE          [ shift and go to state 36 ]
+
+
+state 49
+
+    (15) switch_stmt -> SWITCH expression LBRACE case_list . RBRACE
+
+    RBRACE          shift and go to state 55
+
+
+state 50
+
+    (16) case_list -> case_stmt .
+    (17) case_list -> case_stmt . case_list
+    (16) case_list -> . case_stmt
+    (17) case_list -> . case_stmt case_list
+    (18) case_stmt -> . CASE expression COLON block
+    (19) case_stmt -> . DEFAULT COLON block
+
+    RBRACE          reduce using rule 16 (case_list -> case_stmt .)
+    CASE            shift and go to state 51
+    DEFAULT         shift and go to state 52
+
+    case_stmt                      shift and go to state 50
+    case_list                      shift and go to state 56
+
+state 51
+
+    (18) case_stmt -> CASE . expression COLON block
+    (25) expression -> . NUMBER
+    (26) expression -> . ID
+    (27) expression -> . expression PLUS expression
+    (28) expression -> . expression MINUS expression
+    (29) expression -> . expression TIMES expression
+    (30) expression -> . expression DIVIDE expression
+
+    NUMBER          shift and go to state 21
+    ID              shift and go to state 22
+
+    expression                     shift and go to state 57
+
+state 52
+
+    (19) case_stmt -> DEFAULT . COLON block
+
+    COLON           shift and go to state 58
+
+
+state 53
+
+    (13) ifelse -> IF condition block ELSE block .
+
+    VAR             reduce using rule 13 (ifelse -> IF condition block ELSE block .)
+    ID              reduce using rule 13 (ifelse -> IF condition block ELSE block .)
+    IF              reduce using rule 13 (ifelse -> IF condition block ELSE block .)
+    FOR             reduce using rule 13 (ifelse -> IF condition block ELSE block .)
+    SWITCH          reduce using rule 13 (ifelse -> IF condition block ELSE block .)
+    RETURN          reduce using rule 13 (ifelse -> IF condition block ELSE block .)
+    $end            reduce using rule 13 (ifelse -> IF condition block ELSE block .)
+    RBRACE          reduce using rule 13 (ifelse -> IF condition block ELSE block .)
+
+
+state 54
+
+    (24) block -> LBRACE statement_list RBRACE .
+
+    ELSE            reduce using rule 24 (block -> LBRACE statement_list RBRACE .)
+    VAR             reduce using rule 24 (block -> LBRACE statement_list RBRACE .)
+    ID              reduce using rule 24 (block -> LBRACE statement_list RBRACE .)
+    IF              reduce using rule 24 (block -> LBRACE statement_list RBRACE .)
+    FOR             reduce using rule 24 (block -> LBRACE statement_list RBRACE .)
+    SWITCH          reduce using rule 24 (block -> LBRACE statement_list RBRACE .)
+    RETURN          reduce using rule 24 (block -> LBRACE statement_list RBRACE .)
+    $end            reduce using rule 24 (block -> LBRACE statement_list RBRACE .)
+    RBRACE          reduce using rule 24 (block -> LBRACE statement_list RBRACE .)
+    CASE            reduce using rule 24 (block -> LBRACE statement_list RBRACE .)
+    DEFAULT         reduce using rule 24 (block -> LBRACE statement_list RBRACE .)
+
+
+state 55
+
+    (15) switch_stmt -> SWITCH expression LBRACE case_list RBRACE .
+
+    VAR             reduce using rule 15 (switch_stmt -> SWITCH expression LBRACE case_list RBRACE .)
+    ID              reduce using rule 15 (switch_stmt -> SWITCH expression LBRACE case_list RBRACE .)
+    IF              reduce using rule 15 (switch_stmt -> SWITCH expression LBRACE case_list RBRACE .)
+    FOR             reduce using rule 15 (switch_stmt -> SWITCH expression LBRACE case_list RBRACE .)
+    SWITCH          reduce using rule 15 (switch_stmt -> SWITCH expression LBRACE case_list RBRACE .)
+    RETURN          reduce using rule 15 (switch_stmt -> SWITCH expression LBRACE case_list RBRACE .)
+    $end            reduce using rule 15 (switch_stmt -> SWITCH expression LBRACE case_list RBRACE .)
+    RBRACE          reduce using rule 15 (switch_stmt -> SWITCH expression LBRACE case_list RBRACE .)
+
+
+state 56
+
+    (17) case_list -> case_stmt case_list .
+
+    RBRACE          reduce using rule 17 (case_list -> case_stmt case_list .)
+
+
+state 57
+
+    (18) case_stmt -> CASE expression . COLON block
+    (27) expression -> expression . PLUS expression
+    (28) expression -> expression . MINUS expression
+    (29) expression -> expression . TIMES expression
+    (30) expression -> expression . DIVIDE expression
+
+    COLON           shift and go to state 59
+    PLUS            shift and go to state 33
+    MINUS           shift and go to state 34
+    TIMES           shift and go to state 35
+    DIVIDE          shift and go to state 36
+
+
+state 58
+
+    (19) case_stmt -> DEFAULT COLON . block
+    (24) block -> . LBRACE statement_list RBRACE
+
+    LBRACE          shift and go to state 29
+
+    block                          shift and go to state 60
+
+state 59
+
+    (18) case_stmt -> CASE expression COLON . block
+    (24) block -> . LBRACE statement_list RBRACE
+
+    LBRACE          shift and go to state 29
+
+    block                          shift and go to state 61
+
+state 60
+
+    (19) case_stmt -> DEFAULT COLON block .
+
+    CASE            reduce using rule 19 (case_stmt -> DEFAULT COLON block .)
+    DEFAULT         reduce using rule 19 (case_stmt -> DEFAULT COLON block .)
+    RBRACE          reduce using rule 19 (case_stmt -> DEFAULT COLON block .)
+
+
+state 61
+
+    (18) case_stmt -> CASE expression COLON block .
+
+    CASE            reduce using rule 18 (case_stmt -> CASE expression COLON block .)
+    DEFAULT         reduce using rule 18 (case_stmt -> CASE expression COLON block .)
+    RBRACE          reduce using rule 18 (case_stmt -> CASE expression COLON block .)
+
