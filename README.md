@@ -69,5 +69,3 @@ python src/main.py samples/sample.go --ast
 ```
 python src/main.py samples/sample.go --check
 ```
-```bash
-pip install -r requirements.txt
