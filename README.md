@@ -1,40 +1,83 @@
-# Go Language Analyzer (Subset Compiler Pipeline)
+# Go Language Analyzer (Compiler + Static Analysis Engine)
 
-A command-line static analyzer for a defined subset of the Go programming language. This project implements a simplified compiler pipeline including lexical analysis, parsing, Abstract Syntax Tree (AST) construction, and semantic/type checking.
+A command-line static analysis tool for a subset of the Go programming language.
+This project implements a **compiler front-end pipeline** extended with **control-flow modeling, program analysis, and visualization**.
 
 ---
 
 ## 📌 Overview
 
-This project demonstrates how a compiler pipeline works by processing Go-like source code through multiple stages:
+This project goes beyond a traditional compiler assignment by combining:
 
-1. **Lexical Analysis (Tokenization)**
-2. **Parsing (LALR Grammar using PLY)**
-3. **AST Construction**
-4. **Semantic Analysis (Scope Resolution + Type Checking)**
+* Compiler construction (lexing → parsing → AST)
+* Semantic analysis (type + scope checking)
+* **Control Flow Graph (CFG) generation**
+* **Static analysis on program structure**
+* **Graph-based visualization of programs**
 
-The analyzer detects both syntax and semantic errors and can optionally display the generated AST.
+The system processes Go-like source code through multiple stages and enables both **structural and analytical understanding of programs**.
 
 ---
 
 ## 🚀 Features
 
-### Supported Language Constructs
+### 🔧 Compiler Pipeline
 
-- Variable declarations and assignments
-- Arithmetic and comparison expressions
-- Control flow:
-  - `if` / `else`
-  - `for` loops
-  - `switch-case-default`
-- `return` statements
+* Lexical Analysis (Tokenization using PLY)
+* LALR Parsing (PLY Yacc)
+* Abstract Syntax Tree (AST) construction
+* Semantic analysis:
 
-### Static Analysis Capabilities
+  * Scope resolution
+  * Type checking
 
-- Detection of undeclared variables
-- Detection of variable redeclaration within the same scope
-- Type checking for expressions and assignments
-- Scope-aware symbol resolution (supports nested blocks)
+---
+
+### 🔀 Control Flow Graph (CFG)
+
+* Builds CFG from AST
+* Supports:
+
+  * Sequential flow
+  * Conditional branching (`if / else`)
+  * Loops (`for`)
+  * Multi-branch control (`switch-case-default`)
+* Explicit representation of:
+
+  * Entry and exit nodes
+  * Loop back edges
+  * Merge points
+
+---
+
+### 🔍 Static Analysis
+
+* Detection of:
+
+  * Undeclared variables
+  * Redeclaration errors
+  * Type mismatches
+  * **Dead/unreachable code**
+  * **Unused variables**
+* Scope-aware analysis using symbol tables
+
+---
+
+### 📊 Visualization
+
+* **AST Visualization**
+
+  * Tree representation of program structure
+* **CFG Visualization**
+
+  * Graph representation of execution flow
+  * Color-coded nodes:
+
+    * 🟢 Entry/Exit
+    * 🟠 Conditions
+    * 🟣 Switch
+    * ⚪ Merge points
+    * 🔵 Statements
 
 ---
 
@@ -47,9 +90,12 @@ The analyzer detects both syntax and semantic errors and can optionally display 
 ├── src/
 │   ├── ast_nodes.py
 │   ├── lexer.py
-│   ├── main.py
 │   ├── parser.py
 │   ├── semantic.py
+│   ├── cfg.py
+│   ├── analysis.py
+│   ├── visualize.py
+│   ├── main.py
 │   ├── parser.out
 │   └── parsetab.py
 ├── README.md
@@ -61,28 +107,59 @@ The analyzer detects both syntax and semantic errors and can optionally display 
 ## ⚙️ Architecture
 
 ### 1. Lexer
-- Implemented using **PLY (Lex)**
-- Converts source code into tokens (identifiers, keywords, operators, etc.)
+
+* Implemented using **PLY (Lex)**
+* Converts source code into tokens
+
+---
 
 ### 2. Parser
-- Built using **LALR parsing (PLY Yacc)**
-- Defines grammar rules for a subset of Go
-- Generates an Abstract Syntax Tree (AST)
 
-### 3. AST Representation
-- Tree-based structure representing program hierarchy
-- Each node contains:
-  - `type` (e.g., `VarDecl`, `BinaryOp`)
-  - `value`
-  - child nodes
-- Includes a recursive pretty-printer for visualization
+* Built using **LALR parsing (PLY Yacc)**
+* Generates AST from grammar rules
+
+---
+
+### 3. AST (Abstract Syntax Tree)
+
+* Hierarchical program representation
+* Node types include:
+
+  * `VarDecl`, `Assign`, `BinaryOp`, `If`, `ForLoop`, `Switch`
+* Used as input for semantic and CFG stages
+
+---
 
 ### 4. Semantic Analysis
-- Stack-based symbol table for scope management
-- Handles:
-  - Variable declaration and lookup
-  - Nested scope resolution
-  - Type validation
+
+* Stack-based symbol table
+* Handles:
+
+  * Variable declaration and lookup
+  * Nested scopes
+  * Type validation
+
+---
+
+### 5. CFG Generation
+
+* Transforms AST → Control Flow Graph
+* Each node = **Basic Block**
+* Captures:
+
+  * Execution paths
+  * Branching
+  * Loop cycles
+
+---
+
+### 6. Static Analysis Engine
+
+* Runs analyses on AST + CFG
+* Enables program-level reasoning:
+
+  * Reachability
+  * Usage tracking
 
 ---
 
@@ -91,84 +168,126 @@ The analyzer detects both syntax and semantic errors and can optionally display 
 ### Input
 
 ```go
-var x = 10
-if x > 5 {
-    var y = x + 2
+var x = 2
+
+for x < 5 {
+    x = x + 1
+}
+
+switch x {
+    case 5:
+        x = x + 2
+    default:
+        x = x + 3
 }
 ```
 
-### Output
+---
+
+### CFG Output (conceptual)
 
 ```
-✅ Syntax + Semantic + Type Checking Passed
-
-🌳 AST:
-
-Program
-  VarDecl: x
-    Literal: 10
-  If
-    BinaryOp: >
-      Literal: x
-      Literal: 5
-    Block
-      VarDecl: y
-        BinaryOp: +
-          Literal: x
-          Literal: 2
+ENTRY → VarDecl → LOOP_COND
+           ↓        ↘
+         BODY ←─────┘
+           ↓
+       AFTER_LOOP → SWITCH
+                    ↙   ↘
+                 CASE  DEFAULT
+                    ↓      ↓
+                   MERGE → EXIT
 ```
 
 ---
 
 ## ▶️ How to Run
 
-### 1. Install Dependencies
+### Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 2. Run with AST Output
+---
+
+### Run AST view
 
 ```bash
 python src/main.py samples/sample.go --ast
 ```
 
-### 3. Run for Validation Only
+---
+
+### Run CFG view
 
 ```bash
-python src/main.py samples/sample.go --check
+python src/main.py samples/sample.go --cfg
+```
+
+---
+
+### Visualize CFG
+
+```bash
+python src/main.py samples/sample.go --viz-cfg
+```
+
+---
+
+### Run Static Analysis
+
+```bash
+python src/main.py samples/sample.go --analyze
 ```
 
 ---
 
 ## 🧠 Design Decisions
 
-- **PLY (Lex/Yacc)** was chosen to explicitly implement grammar rules and understand parsing mechanics instead of relying on abstracted parsers
-- **AST-first design** separates parsing from semantic analysis
-- **Scoped symbol table** (stack-based) ensures correct handling of nested blocks and variable shadowing
+* **PLY (Lex/Yacc)** for explicit grammar control and learning parsing internals
+* **AST-first architecture** for separation of concerns
+* **CFG-based analysis** to enable graph-level reasoning
+* **Modular design** (lexer, parser, semantic, cfg, analysis, visualize)
 
 ---
 
 ## ⚠️ Limitations
 
-- Supports only a subset of Go (no functions, structs, or concurrency primitives)
-- Minimal type system (primarily integer-based)
-- No error recovery — stops at first error
-- No optimization or code generation phase
+* Supports only a subset of Go
+* No functions, structs, or advanced types
+* Basic type system (primarily integers)
+* No optimization or code generation
+* Visualization uses force-directed layout (not hierarchical)
 
 ---
 
 ## 🔮 Future Improvements
 
-- Extend type system (strings, booleans, composite types)
-- Add function definitions and calls
-- Improve error reporting and recovery
-- Introduce intermediate representation (IR) or code generation
+* Data-flow analysis (live variable analysis)
+* Intermediate Representation (IR)
+* SSA form
+* Optimization passes
+* Function support
+* Better CFG layout (Graphviz-based)
+* IDE / VS Code extension
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Python**
-- **PLY** (Lex/Yacc)
+* **Python**
+* **PLY (Lex/Yacc)**
+* **NetworkX** (graph modeling)
+* **Matplotlib** (visualization)
+
+---
+
+## 🏆 Summary
+
+This project evolves a traditional compiler pipeline into a **graph-based static analysis system**, combining:
+
+* Compiler fundamentals
+* Graph theory
+* Program analysis
+
+👉 Suitable for systems, compilers, and program analysis exploration.
