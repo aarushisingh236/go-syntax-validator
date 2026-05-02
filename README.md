@@ -96,7 +96,6 @@ The system processes Go-like source code through multiple stages and enables bot
 │   ├── analysis.py
 │   ├── visualize.py
 │   ├── main.py
-│   ├── parser.out
 │   └── parsetab.py
 ├── README.md
 └── requirements.txt
